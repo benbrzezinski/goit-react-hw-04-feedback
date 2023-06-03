@@ -1,0 +1,12 @@
+.statisticsTitle {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.statistics {
+  padding-left: 20px;
+}
+
+.statisticsItem:not(:last-child) {
+  margin-bottom: 4px;
+}
