@@ -8,7 +8,7 @@ const FeedbackOptions = ({ options, setFeedback }) => (
         className={css.feedbackBtn}
         key={id}
         type="button"
-        onClick={() => setFeedback(type)}
+        onClick={setFeedback(type)}
       >
         {type}
       </button>

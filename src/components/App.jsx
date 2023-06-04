@@ -12,40 +12,19 @@ const App = () => {
   const [bad, setBad] = useState(0);
 
   const setFeedback = type => {
-    switch (type) {
-      case 'good':
-        setGood(good + STEP);
-        break;
-      case 'neutral':
-        setNeutral(neutral + STEP);
-        break;
-      case 'bad':
-        setBad(bad + STEP);
-        break;
-      default:
-        console.error('Type not specified');
-    }
-  };
+    const feedbackTypes = {
+      good: () => setGood(good + STEP),
+      neutral: () => setNeutral(neutral + STEP),
+      bad: () => setBad(bad + STEP),
+    };
 
-  const countTotalFeedback = (...args) => args.reduce((acc, n) => acc + n, 0);
-
-  const countPositiveFeedbackPercentage = () => {
-    const totalFeedback = countTotalFeedback(good, neutral, bad);
-    const positiveFeedbackPercentage = (good / totalFeedback) * 100;
-
-    return Math.round(positiveFeedbackPercentage);
+    return feedbackTypes[type] ?? console.error('Type not specified');
   };
 
   return (
     <Section>
       <FeedbackOptions options={options} setFeedback={setFeedback} />
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-        total={countTotalFeedback(good, neutral, bad)}
-        positivePercentage={countPositiveFeedbackPercentage()}
-      />
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </Section>
   );
 };
