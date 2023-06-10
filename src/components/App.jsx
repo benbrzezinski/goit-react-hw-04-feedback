@@ -7,15 +7,14 @@ import options from './FeedbackOptions/options';
 const App = () => {
   const STEP = 1;
 
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [opinion, setOpinion] = useState({ good: 0, neutral: 0, bad: 0 });
 
   const setFeedback = type => {
     const feedbackTypes = {
-      good: () => setGood(good + STEP),
-      neutral: () => setNeutral(neutral + STEP),
-      bad: () => setBad(bad + STEP),
+      good: () => setOpinion(({ good }) => ({ ...opinion, good: good + STEP })),
+      neutral: () =>
+        setOpinion(({ neutral }) => ({ ...opinion, neutral: neutral + STEP })),
+      bad: () => setOpinion(({ bad }) => ({ ...opinion, bad: bad + STEP })),
     };
 
     return feedbackTypes[type] ?? console.error('Type not specified');
@@ -24,7 +23,11 @@ const App = () => {
   return (
     <Section>
       <FeedbackOptions options={options} setFeedback={setFeedback} />
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <Statistics
+        good={opinion.good}
+        neutral={opinion.neutral}
+        bad={opinion.bad}
+      />
     </Section>
   );
 };
