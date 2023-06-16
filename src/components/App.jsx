@@ -10,13 +10,7 @@ const App = () => {
   const [opinion, setOpinion] = useState({ good: 0, neutral: 0, bad: 0 });
 
   const setFeedback = type => {
-    const feedbackTypes = {
-      good: () => setOpinion(o => ({ ...o, good: o.good + STEP })),
-      neutral: () => setOpinion(o => ({ ...o, neutral: o.neutral + STEP })),
-      bad: () => setOpinion(o => ({ ...o, bad: o.bad + STEP })),
-    };
-
-    return feedbackTypes[type] ?? console.error('Type not specified');
+    setOpinion(o => ({ ...o, [type]: o[type] + STEP }));
   };
 
   return (
